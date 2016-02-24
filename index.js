@@ -1,4 +1,4 @@
-  'use strict'
+'use strict'
 
 
 const Quark = require('proton-quark')
@@ -20,7 +20,7 @@ module.exports = class ExceptionsQuark extends Quark {
   initialize() {
     const exceptionsPath = path.join(this.proton.app.path, '/exceptions')
     const exceptions = require('require-all')(exceptionsPath)
-    _.forEach(exceptions, Exception => new Exception(this.proton))
+    _.forEach(exceptions, Exception => new Exception("Exception", this.proton))
   }
 
 }
