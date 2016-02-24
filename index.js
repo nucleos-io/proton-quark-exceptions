@@ -18,9 +18,30 @@ module.exports = class ExceptionsQuark extends Quark {
   }
 
   initialize() {
+    this._bindToApp()
+    this._bindToProton()
+  }
+
+  _bindToApp() {
     const exceptionsPath = path.join(this.proton.app.path, '/exceptions')
     const exceptions = require('require-all')(exceptionsPath)
     _.forEach(exceptions, Exception => new Exception("Exception", this.proton))
+  }
+
+  _bindToProton() {
+    this.proton.use(function*(next) {
+      try {
+        yield next
+      } catch (err) {
+        if (err.handle) {
+          err.handle(this)
+        } else {
+          this.status = 500
+          this.body = err.message
+        }
+        this.app.emit('error', err, this)
+      }
+    })
   }
 
 }
