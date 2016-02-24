@@ -25,7 +25,9 @@ module.exports = class ExceptionsQuark extends Quark {
   _bindToApp() {
     const exceptionsPath = path.join(this.proton.app.path, '/exceptions')
     const exceptions = require('require-all')(exceptionsPath)
-    _.forEach(exceptions, Exception => new Exception("Exception", this.proton))
+    _.forEach(exceptions, Exception => {
+      global[Exception.prototype.constructor.name] = Exception
+    })
   }
 
   _bindToProton() {
