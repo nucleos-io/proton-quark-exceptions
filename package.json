@@ -1,6 +1,6 @@
 {
   "name": "proton-quark-exceptions",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "lodash": "^4.0.0",
     "proton-quark": "^1.0.0",
-    "require-all": "^2.0.0"
+    "require-all": "^2.0.0",
+    "stack-trace": "0.0.9"
   }
 }

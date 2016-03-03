@@ -40,29 +40,18 @@ class ExceptionsQuark extends Quark {
   initialize() {
     _.forEach(this._exceptions, exception => {
       exception.expose(exception)
-      this.bindToApp(exception)
+      this._addExceptionToApp(exception)
     })
   }
 
   /**
    * @override
-   * @method bindToApp
+   * @method _addExceptionToApp
    * @description Add to the app exception object the exceptions
    * @author Luis Hernandez
    */
-  bindToApp(...args) {
-    const exception = args[0]
+  _addExceptionToApp(exception) {
     this.proton.app.exceptions[exception.name] = exception
-  }
-
-  /**
-   * @override
-   * @method bindToProton
-   * @description Add an error manager as middleware in the app
-   * @author Luis Hernandez
-   */
-  bindToProton() {
-    // TODO
   }
 
   get _exceptions() {
