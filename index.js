@@ -68,3 +68,5 @@ class ExceptionsQuark extends Quark {
   }
 
 }
+
+module.exports = ExceptionsQuark
