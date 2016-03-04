@@ -42,7 +42,7 @@ class ExceptionsQuark extends Quark {
       exception.expose(exception)
       this._addExceptionToApp(exception)
     })
-    this.proton.use(exceptionManager)
+    this.proton.use(this.exceptionManager)
   }
 
   /**
