@@ -42,6 +42,7 @@ class ExceptionsQuark extends Quark {
       exception.expose(exception)
       this._addExceptionToApp(exception)
     })
+    this.proton.use(exceptionManager)
   }
 
   /**
@@ -64,6 +65,7 @@ class ExceptionsQuark extends Quark {
       yield next
     } catch (err) {
       const trace = stackTrace.parse(err)
+      console.log(trace)
     }
   }
 
