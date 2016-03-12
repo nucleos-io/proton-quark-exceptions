@@ -65,9 +65,23 @@ class ExceptionsQuark extends Quark {
       yield next
     } catch (err) {
       const trace = stackTrace.parse(err)
-      console.log(trace)
+      const controllers = proton.app.controllers
+      const services = proton.app.services
+      const policies = proton.app.policies
+      const models = proton.app.models
+      const all = _.defaults(controllers, services, policies, models)
+      _.forEach(trace, error => {
+        _.forEach(all, module => {
+          if (module.fileName == path.baseName(error.fileName, '.js')) {
+            this.err = err
+            module.handlerError(this)
+          }
+        })
+      })
     }
   }
+
+
 
 }
 
